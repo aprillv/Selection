@@ -1,8 +1,8 @@
 //
-//  AssembliesViewController.swift
+//  SelectionListViewController.swift
 //  Selection
 //
-//  Created by April on 3/12/16.
+//  Created by April on 3/13/16.
 //  Copyright © 2016 BuildersAccess. All rights reserved.
 //
 
@@ -10,8 +10,8 @@ import UIKit
 import Alamofire
 import MBProgressHUD
 
-class AssembliesViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
-
+class SelectionListViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+    
     @IBOutlet var searchBar: UISearchBar!{
         didSet{
             searchBar.text = ""
@@ -31,68 +31,70 @@ class AssembliesViewController: BaseViewController, UITableViewDataSource, UITab
         self.getAssembliesFromServer()
     }
     
-    var assemblyListOrigin: [AssemblyItem]? {
+    var selectionListOrigin: [AssemblySelectionObj]? {
         didSet{
             if searchBar.text == "" {
-                assemblyList = assemblyListOrigin
+                selectionList = selectionListOrigin
             }else{
                 self.searchBar(searchBar, textDidChange: searchBar.text!)
             }
         }
     }
-    var assemblyList: [AssemblyItem]?{
+    var selectionList: [AssemblySelectionObj]?{
         didSet{
-           self.tableview.reloadData()
+            self.tableview.reloadData()
         }
     }
     var ciaid: String?
+    var idassembly: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getAssembliesFromServer()
     }
     private struct constants{
-        static let cellIdentifier = "assembly cell"
+        static let cellIdentifier = "selection cell"
         static let headcellIdentifier = "head cell"
     }
-   
+    
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCellWithIdentifier(constants.headcellIdentifier)
         cell?.backgroundColor = CConstants.BackColor
         return cell
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return assemblyList?.count ?? 0
+        return selectionList?.count ?? 0
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(constants.cellIdentifier, forIndexPath: indexPath)
-        if let cell1 = cell as? AssemblyCell{
-        let item = assemblyList![indexPath.row]
+        if let cell1 = cell as? SeletionCell{
+            let item = selectionList![indexPath.row]
             cell1.setContentDetail(item)
         }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier(CConstants.SegueToSelectionList, sender: self.assemblyList![indexPath.row])
+        self.performSegueWithIdentifier(CConstants.SegueToSelectionAreaList, sender: selectionList![indexPath.row])
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let identifier = segue.identifier {
-            switch identifier{
-            case CConstants.SegueToSelectionList:
-                if let item = sender as? AssemblyItem{
-                    if let v = segue.destinationViewController as? SelectionListViewController {
-                        v.title = "\(item.idnumber!) ~ \(item.name!)"
+            switch identifier {
+            case CConstants.SegueToSelectionAreaList:
+                if let item = sender as? AssemblySelectionObj {
+                    if let v = segue.destinationViewController as? SelectionAreaListViewController {
+                        v.title = item.selectionname
                         v.ciaid = self.ciaid
-                        v.idassembly = item.idnumber
+                        v.idassembly = item.idassembly
                     }
                 }
+                
             default:
-                break;
+                break
             }
         }
     }
@@ -101,8 +103,8 @@ class AssembliesViewController: BaseViewController, UITableViewDataSource, UITab
         let userInfo = NSUserDefaults.standardUserDefaults()
         if let email = userInfo.objectForKey(CConstants.UserInfoEmail) as? String,
             let pwd = userInfo.objectForKey(CConstants.UserInfoPwd) as? String,
-            let ciaidValue = ciaid{
-                let assemblyRequired = AssemblyRequired(email: email, password: pwd, ciaid: ciaidValue)
+            let ciaidValue = ciaid, idassemblyValue = idassembly{
+                let assemblyRequired = AssemblySelectionRequired(email: email, password: pwd, ciaid: ciaidValue, idassembly: idassemblyValue)
                 
                 let a = assemblyRequired.toDictionary()
                 
@@ -113,7 +115,7 @@ class AssembliesViewController: BaseViewController, UITableViewDataSource, UITab
                 }
                 
                 
-                Alamofire.request(.POST, CConstants.ServerURL + CConstants.AssemblyListServiceURL, parameters: a).responseJSON{ (response) -> Void in
+                Alamofire.request(.POST, CConstants.ServerURL + CConstants.AssemblySelectionListServiceURL, parameters: a).responseJSON{ (response) -> Void in
                     //                    self.clearNotice()
                     hud?.hide(true)
                     self.refreshControl?.endRefreshing()
@@ -122,11 +124,11 @@ class AssembliesViewController: BaseViewController, UITableViewDataSource, UITab
                     if response.result.isSuccess {
 //                        print(response.result.value)
                         if let rtnValue = response.result.value as? [[String: String]]{
-                            var tmp = [AssemblyItem]()
+                            var tmp = [AssemblySelectionObj]()
                             for o in rtnValue {
-                                tmp.append(AssemblyItem(dicInfo: o))
+                                tmp.append(AssemblySelectionObj(dicInfo: o))
                             }
-                            self.assemblyListOrigin = tmp
+                            self.selectionListOrigin = tmp
                             self.tableview.reloadData()
                         }else{
                             
@@ -140,27 +142,28 @@ class AssembliesViewController: BaseViewController, UITableViewDataSource, UITab
         }
         
         
-    
+        
     }
     
     // MARK: - Search Bar Deleagte
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if let txt = searchBar.text?.lowercaseString{
             if txt.isEmpty{
-                assemblyList = assemblyListOrigin
+                selectionList = selectionListOrigin
             }else{
-                assemblyList = assemblyListOrigin?.filter(){
+                selectionList = selectionListOrigin?.filter(){
 //                    print($0)
-                    return $0.idnumber!.lowercaseString.containsString(txt)
-                        || $0.idcostcode!.lowercaseString.containsString(txt)
-                    || $0.name!.lowercaseString.containsString(txt)
-                    || $0.categorygroup!.lowercaseString.containsString(txt)
+                return $0.idselection!.lowercaseString.containsString(txt)
+                        || $0.selectionname!.lowercaseString.containsString(txt)
+                        || $0.type!.lowercaseString.containsString(txt)
+                        || $0.pricebook!.lowercaseString.containsString(txt)
+                        || $0.pricelevel!.lowercaseString.containsString(txt)
                     
                     
                 }
             }
         }else{
-            assemblyList = assemblyListOrigin
+            selectionList = selectionListOrigin
         }
         
     }

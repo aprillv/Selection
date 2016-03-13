@@ -50,8 +50,8 @@ struct CConstants{
 //    static let SegueToExhibitA : String = "exhibita"
 //    static let SegueToExhibitB : String = "exhibitb"
 //    static let SegueToExhibitC : String = "exhibitc"
-    static let SegueToPrintModel : String = "printModel"
-    static let SegueToPrintModelPopover : String = "Print switch"
+    static let SegueToSelectionList : String = "show selection list"
+    static let SegueToSelectionAreaList : String = "show selection area list"
     static let SegueToAddressModelPopover : String = "Address switch"
     static let SegueToOperationsPopover : String = "Show Operations"
     
@@ -65,14 +65,10 @@ struct CConstants{
     static let CheckUpdateServiceURL: String = "bacontract_version.json"
     //get assembly list
     static let AssemblyListServiceURL = "baslection_assemblylist.json"
-    //get contract Addendum A
-    static let AddendumAServiceURL = "bacontract_addendumA.json"
-    //get contract Addendum c
-    static let AddendumCServiceURL = "bacontract_addendumc.json"
-    //get contract ClosingMemo
-    static let ClosingMemoServiceURL = "bacontract_closingMemo.json"
-    //get contract Design Center
-    static let DesignCenterServiceURL = "bacontract_designCenter.json"
+    //get assembly selection list
+    static let AssemblySelectionListServiceURL = "baslection_assembly.json"
+    //get assembly selection area list
+    static let AssemblySelectionAreaListServiceURL = "baslection_assemblyselection.json"
     // get Third Party Financing Addendum
 //    static let ThirdPartyFinancingAddendumServiceURL = "bacontract_thirdPartyFinancingAddendum.json"
     //upload pdf

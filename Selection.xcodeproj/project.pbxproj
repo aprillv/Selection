@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11167DD11C950EAD00E89128 /* AssemblySelectionRequired.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11167DD01C950EAD00E89128 /* AssemblySelectionRequired.swift */; };
+		11167DD31C950F2700E89128 /* AssemblySelectionAreaRequired.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11167DD21C950F2700E89128 /* AssemblySelectionAreaRequired.swift */; };
 		112F40A41C939AFA00C04C2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F40A31C939AFA00C04C2E /* AppDelegate.swift */; };
 		112F40A91C939AFA00C04C2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112F40A71C939AFA00C04C2E /* Main.storyboard */; };
 		112F40AC1C939AFA00C04C2E /* Selection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 112F40AA1C939AFA00C04C2E /* Selection.xcdatamodeld */; };
@@ -25,10 +27,18 @@
 		112F40D21C93FEBF00C04C2E /* AssemblyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F40D11C93FEBF00C04C2E /* AssemblyItem.swift */; };
 		112F40D41C94004700C04C2E /* AssemblyRequired.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F40D31C94004700C04C2E /* AssemblyRequired.swift */; };
 		112F40D61C9410DE00C04C2E /* CiaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F40D51C9410DE00C04C2E /* CiaCell.swift */; };
+		1132FBDB1C9516D300553817 /* SeletionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1132FBDA1C9516D300553817 /* SeletionCell.swift */; };
+		116BC9441C95103800F1ACDC /* SelectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BC9431C95103800F1ACDC /* SelectionListViewController.swift */; };
+		116BC9461C95105400F1ACDC /* SelectionAreaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BC9451C95105400F1ACDC /* SelectionAreaListViewController.swift */; };
+		116BC9481C95113300F1ACDC /* AssemblySelectionObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BC9471C95113300F1ACDC /* AssemblySelectionObj.swift */; };
+		116BC94A1C95118A00F1ACDC /* AssemblySelectionAreaObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BC9491C95118A00F1ACDC /* AssemblySelectionAreaObj.swift */; };
+		11D8C2041C953FE40010AD2E /* SelectionAreaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8C2031C953FE40010AD2E /* SelectionAreaCell.swift */; };
 		1D994B5B6F0D7B0BBF176C09 /* Pods_Selection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 733DAB4E6A9E2A709E7F8E28 /* Pods_Selection.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11167DD01C950EAD00E89128 /* AssemblySelectionRequired.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssemblySelectionRequired.swift; sourceTree = "<group>"; };
+		11167DD21C950F2700E89128 /* AssemblySelectionAreaRequired.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssemblySelectionAreaRequired.swift; sourceTree = "<group>"; };
 		112F40A01C939AFA00C04C2E /* Selection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Selection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		112F40A31C939AFA00C04C2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		112F40A81C939AFA00C04C2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -49,6 +59,12 @@
 		112F40D11C93FEBF00C04C2E /* AssemblyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssemblyItem.swift; sourceTree = "<group>"; };
 		112F40D31C94004700C04C2E /* AssemblyRequired.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssemblyRequired.swift; sourceTree = "<group>"; };
 		112F40D51C9410DE00C04C2E /* CiaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CiaCell.swift; sourceTree = "<group>"; };
+		1132FBDA1C9516D300553817 /* SeletionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeletionCell.swift; sourceTree = "<group>"; };
+		116BC9431C95103800F1ACDC /* SelectionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionListViewController.swift; sourceTree = "<group>"; };
+		116BC9451C95105400F1ACDC /* SelectionAreaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionAreaListViewController.swift; sourceTree = "<group>"; };
+		116BC9471C95113300F1ACDC /* AssemblySelectionObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssemblySelectionObj.swift; sourceTree = "<group>"; };
+		116BC9491C95118A00F1ACDC /* AssemblySelectionAreaObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssemblySelectionAreaObj.swift; sourceTree = "<group>"; };
+		11D8C2031C953FE40010AD2E /* SelectionAreaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionAreaCell.swift; sourceTree = "<group>"; };
 		733DAB4E6A9E2A709E7F8E28 /* Pods_Selection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Selection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2D350F7E87E6D8A87943BED /* Pods-Selection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Selection.release.xcconfig"; path = "Pods/Target Support Files/Pods-Selection/Pods-Selection.release.xcconfig"; sourceTree = "<group>"; };
 		D0F9B684897980B12483ADA9 /* Pods-Selection.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Selection.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Selection/Pods-Selection.debug.xcconfig"; sourceTree = "<group>"; };
@@ -110,6 +126,10 @@
 				112F40C81C93E26B00C04C2E /* CialistItemObj.swift */,
 				112F40D11C93FEBF00C04C2E /* AssemblyItem.swift */,
 				112F40D31C94004700C04C2E /* AssemblyRequired.swift */,
+				11167DD01C950EAD00E89128 /* AssemblySelectionRequired.swift */,
+				11167DD21C950F2700E89128 /* AssemblySelectionAreaRequired.swift */,
+				116BC9471C95113300F1ACDC /* AssemblySelectionObj.swift */,
+				116BC9491C95118A00F1ACDC /* AssemblySelectionAreaObj.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -121,6 +141,8 @@
 				112F40BA1C93A23100C04C2E /* LoginViewController.swift */,
 				112F40BB1C93A23100C04C2E /* BaseViewController.swift */,
 				112F40CC1C93F72000C04C2E /* AssembliesViewController.swift */,
+				116BC9431C95103800F1ACDC /* SelectionListViewController.swift */,
+				116BC9451C95105400F1ACDC /* SelectionAreaListViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -130,6 +152,8 @@
 			children = (
 				112F40CF1C93FA5500C04C2E /* AssemblyCell.swift */,
 				112F40D51C9410DE00C04C2E /* CiaCell.swift */,
+				1132FBDA1C9516D300553817 /* SeletionCell.swift */,
+				11D8C2031C953FE40010AD2E /* SelectionAreaCell.swift */,
 			);
 			path = CustomControl;
 			sourceTree = "<group>";
@@ -275,15 +299,23 @@
 			files = (
 				112F40AC1C939AFA00C04C2E /* Selection.xcdatamodeld in Sources */,
 				112F40BC1C93A23100C04C2E /* CConstants.swift in Sources */,
+				116BC9481C95113300F1ACDC /* AssemblySelectionObj.swift in Sources */,
 				112F40D21C93FEBF00C04C2E /* AssemblyItem.swift in Sources */,
 				112F40A41C939AFA00C04C2E /* AppDelegate.swift in Sources */,
 				112F40D41C94004700C04C2E /* AssemblyRequired.swift in Sources */,
+				1132FBDB1C9516D300553817 /* SeletionCell.swift in Sources */,
+				116BC9441C95103800F1ACDC /* SelectionListViewController.swift in Sources */,
+				11167DD11C950EAD00E89128 /* AssemblySelectionRequired.swift in Sources */,
 				112F40CB1C93E34F00C04C2E /* LoginUserRequired.swift in Sources */,
 				112F40C91C93E26B00C04C2E /* CialistItemObj.swift in Sources */,
+				11D8C2041C953FE40010AD2E /* SelectionAreaCell.swift in Sources */,
 				112F40CD1C93F72000C04C2E /* AssembliesViewController.swift in Sources */,
 				112F40C71C93E1EF00C04C2E /* LoginedUserObj.swift in Sources */,
 				112F40C51C93E11500C04C2E /* BaseModelObject.swift in Sources */,
+				116BC94A1C95118A00F1ACDC /* AssemblySelectionAreaObj.swift in Sources */,
+				11167DD31C950F2700E89128 /* AssemblySelectionAreaRequired.swift in Sources */,
 				112F40D61C9410DE00C04C2E /* CiaCell.swift in Sources */,
+				116BC9461C95105400F1ACDC /* SelectionAreaListViewController.swift in Sources */,
 				112F40BE1C93A23100C04C2E /* LoginViewController.swift in Sources */,
 				112F40D01C93FA5500C04C2E /* AssemblyCell.swift in Sources */,
 				112F40BD1C93A23100C04C2E /* CiaListViewController.swift in Sources */,
