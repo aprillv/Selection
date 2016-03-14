@@ -9,6 +9,7 @@
 import UIKit
 
 class CiaCell: UITableViewCell {
+    @IBOutlet var lbl: UILabel!
     override func setHighlighted(highlighted: Bool, animated: Bool) {
         self.setCellBackColor(highlighted)
     }

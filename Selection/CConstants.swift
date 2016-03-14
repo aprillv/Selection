@@ -14,7 +14,7 @@ struct CConstants{
     static let BorderColor : UIColor = UIColor(red: 204/255.0, green: 204/255.0, blue: 204/255.0, alpha: 1)
     static let BackColor : UIColor = UIColor(red: 246/255.0, green: 246/255.0, blue: 246/255.0, alpha: 1)
     
-    static let MsgTitle : String = "BA Contract"
+    static let MsgTitle : String = "BA Selection"
     static let MsgOKTitle : String = "OK"
     static let MsgValidationTitle : String = "Validation Failed"
     static let MsgServerError : String = "Server Error, please try again later"
@@ -36,6 +36,7 @@ struct CConstants{
     static let CheckedImgNm = "checked"
     static let CheckImgNm = "check"
     static let SuccessImageNm = "checkmark"
+    static let FailImageNm = "fail"
     
     static let SegueToCiaList :  String = "CiaList"
     static let SegueToAssemblies : String = "show Assemblies"
@@ -57,6 +58,8 @@ struct CConstants{
     
     
     static let LoggedUserNameKey : String = "LoggedUserNameInDefaults"
+    static let UserInfoCiaId : String = "CiaId"
+    static let UserInfoCiaName : String = "CiaName"
     static let InstallAppLink : String = "itms-services://?action=download-manifest&url=https://www.buildersaccess.com/iphone/contract.plist"
     static let ServerURL : String = "https://contractssl.buildersaccess.com/"
     //validate login and get address list

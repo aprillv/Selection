@@ -86,7 +86,8 @@ class AssembliesViewController: BaseViewController, UITableViewDataSource, UITab
             case CConstants.SegueToSelectionList:
                 if let item = sender as? AssemblyItem{
                     if let v = segue.destinationViewController as? SelectionListViewController {
-                        v.title = "\(item.idnumber!) ~ \(item.name!)"
+//                        v.title = "\(item.idnumber!) ~ \(item.name!)"
+                        v.title = "\(item.name!)"
                         v.ciaid = self.ciaid
                         v.idassembly = item.idnumber
                     }

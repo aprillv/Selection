@@ -16,7 +16,29 @@ class CiaListViewController: UITableViewController, UISearchBarDelegate {
    
     @IBOutlet var backItem: UIBarButtonItem!
 //    @IBOutlet var switchItem: UIBarButtonItem!
-    @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var searchBar: UISearchBar!{
+        didSet{
+            
+//            searchBar.placeholder = "     "
+//            
+//            if let txt = searchBar.valueForKey("_searchField") as? UITextField {
+////                txt.backgroundColor = UIColor.whiteColor()
+////                txt.leftViewMode = .Never
+//////                txt.leftView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+////                txt.rightViewMode = .Never
+////                
+//////                txt.background =  UIImage(named: "search")
+//////                txt.leftView = UIImageView(image: UIImage(named: "search"))
+//////               txt.addSubview(UIImageView(image: UIImage(named: "search")))
+//////                txt.edd
+////                txt.borderStyle = .None
+////                txt.layer.borderColor = UIColor.clearColor().CGColor
+////                
+//                txt.textAlignment = .Left
+////                txt.clearButtonMode = .Never
+//            }
+        }
+    }
     @IBAction func doLogout(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
@@ -120,11 +142,14 @@ class CiaListViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell;
         cell = tableView.dequeueReusableCellWithIdentifier(constants.CellIdentifier, forIndexPath: indexPath)
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
-        cell.preservesSuperviewLayoutMargins = false
-        let item  = CiaList![indexPath.row]
-        cell.textLabel?.text = "\(item.ciaid!) ~ \(item.cianame!)"
+//        cell.separatorInset = UIEdgeInsetsZero
+//        cell.layoutMargins = UIEdgeInsetsZero
+//        cell.preservesSuperviewLayoutMargins = false
+        if let cell1 = cell as? CiaCell {
+            let item  = CiaList![indexPath.row]
+            cell1.lbl.text = "\(item.ciaid!) ~ \(item.cianame!)"
+        }
+        
         return cell
         
     }
@@ -208,6 +233,7 @@ class CiaListViewController: UITableViewController, UISearchBarDelegate {
 
        self.searchBar.resignFirstResponder()
         
+        
         self.performSegueWithIdentifier(CConstants.SegueToAssemblies, sender: self.CiaList![indexPath.row])
         
     }
@@ -220,6 +246,10 @@ class CiaListViewController: UITableViewController, UISearchBarDelegate {
                     if let item = sender as? CialistItemObj {
                         a.ciaid = item.ciaid
                         a.title = item.cianame!
+                        
+                        let userInfo = NSUserDefaults.standardUserDefaults()
+                        userInfo.setValue(item.ciaid!, forKey: CConstants.UserInfoCiaId)
+                        userInfo.setValue(item.cianame!, forKey: CConstants.UserInfoCiaName)
                     }
                 }
             default:

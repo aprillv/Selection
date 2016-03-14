@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIToolbar.appearance().barTintColor = CConstants.ApplicationColor
         UIToolbar.appearance().barStyle = .Black
         
-        
+        self.window?.backgroundColor = UIColor.whiteColor()
         
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName : UIFont(name: CConstants.ApplicationBarFontName, size: CConstants.ApplicationBarItemFontSize)!, NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
         UISearchBar.appearance().barTintColor = CConstants.SearchBarBackColor

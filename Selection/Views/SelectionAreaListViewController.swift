@@ -11,7 +11,7 @@ import Alamofire
 import MBProgressHUD
 
 
-class SelectionAreaListViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class SelectionAreaListViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet var searchBar: UISearchBar!{
         didSet{
@@ -56,6 +56,8 @@ class SelectionAreaListViewController: BaseViewController, UITableViewDataSource
     private struct constants{
         static let cellIdentifier = "selection area cell"
         static let headcellIdentifier = "head cell"
+        static let segueToBigPicture = "show big picture"
+        static let segueToViewCatalog = "show view catalog"
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -74,6 +76,8 @@ class SelectionAreaListViewController: BaseViewController, UITableViewDataSource
         if let cell1 = cell as? SelectionAreaCell{
             let item = selectionList![indexPath.row]
             item.idcia = self.ciaid
+            cell1.thumbnail.tag = indexPath.row
+            cell1.superActionView = self
             cell1.setContentDetail(item)
         }
         return cell
@@ -120,6 +124,7 @@ class SelectionAreaListViewController: BaseViewController, UITableViewDataSource
         }
     }
     
+    
     // MARK: - Search Bar Deleagte
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if let txt = searchBar.text?.lowercaseString{
@@ -138,6 +143,48 @@ class SelectionAreaListViewController: BaseViewController, UITableViewDataSource
             selectionList = selectionListOrigin
         }
         
+    }
+    
+    @IBAction func imageTapped(sender: UITapGestureRecognizer) {
+        
+        let tag = sender.view?.tag ?? 0
+        let item = selectionList![tag]
+        self.performSegueWithIdentifier(constants.segueToBigPicture, sender: item)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case constants.segueToViewCatalog:
+                if let vc = segue.destinationViewController as? ViewCatalog {
+                    vc.selectionList = self.selectionListOrigin?.filter(){
+                        return $0.fs == "True"
+                    }
+                }
+            case constants.segueToBigPicture:
+//                if let ppc = tvc.popoverPresentationController {
+//                    ppc.delegate = self
+//                    tvc.AddressListOrigin = self.AddressList
+//                    tvc.delegate = self
+//                }
+                
+                if let item = sender as? AssemblySelectionAreaObj,
+                let vc = segue.destinationViewController as? BigPictureViewController{
+                    
+                   
+                    
+                    let url = NSURL(string: "https://contractssl.buildersaccess.com/baselection_image?idcia=\(item.idcia!)&idassembly1=\(item.idassembly1!)&upc=\(item.upc!)&isthumbnail=0")
+                    vc.imageUrl = url
+                        
+                        
+                        
+                        
+                }
+            default:
+                break
+            }
+        }
     }
     
 }
