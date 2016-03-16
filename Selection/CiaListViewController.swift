@@ -19,6 +19,28 @@ class CiaListViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet var searchBar: UISearchBar!{
         didSet{
             
+            
+//            for iv in searchBar.subviews {
+//                for iv1 in iv.subviews {
+//                    if !iv1.isKindOfClass(UITextField){
+//                        iv1.removeFromSuperview()
+//                    }
+////                    for iv2 in iv1.subviews {
+////                        print(iv2)
+//////                        iv2.removeFromSuperview()
+////                    }
+//                }
+//            }
+            
+//            let txt = searchBar.valueForKey("_searchGround")
+//            print(txt)
+            
+//            searchBar.placeholder = "Search"
+////            searchBar.userInteractionEnabled = false
+//            let txt1 = UITextField(frame: CGRect(x: 50, y: 12, width: searchBar.frame.width - 60, height: 22))
+//            txt1.backgroundColor = UIColor.whiteColor()
+//            searchBar.addSubview(txt1)
+            
 //            searchBar.placeholder = "     "
 //            
 //            if let txt = searchBar.valueForKey("_searchField") as? UITextField {
