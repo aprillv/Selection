@@ -60,18 +60,18 @@ struct CConstants{
     static let LoggedUserNameKey : String = "LoggedUserNameInDefaults"
     static let UserInfoCiaId : String = "CiaId"
     static let UserInfoCiaName : String = "CiaName"
-    static let InstallAppLink : String = "itms-services://?action=download-manifest&url=https://www.buildersaccess.com/iphone/contract.plist"
+    static let InstallAppLink : String = "itms-services://?action=download-manifest&url=https://www.buildersaccess.com/iphone/selection.plist"
     static let ServerURL : String = "https://contractssl.buildersaccess.com/"
     //validate login and get address list
-    static let LoginServiceURL: String = "baslection_login.json"
+    static let LoginServiceURL: String = "baselection_login.json"
     //check app version
-    static let CheckUpdateServiceURL: String = "bacontract_version.json"
+    static let CheckUpdateServiceURL: String = "bacontract_ChkVersion.json"
     //get assembly list
-    static let AssemblyListServiceURL = "baslection_assemblylist.json"
+    static let AssemblyListServiceURL = "baselection_assemblylist.json"
     //get assembly selection list
-    static let AssemblySelectionListServiceURL = "baslection_assembly.json"
+    static let AssemblySelectionListServiceURL = "baselection_assembly.json"
     //get assembly selection area list
-    static let AssemblySelectionAreaListServiceURL = "baslection_assemblyselection.json"
+    static let AssemblySelectionAreaListServiceURL = "baselection_assemblyselection.json"
     // get Third Party Financing Addendum
 //    static let ThirdPartyFinancingAddendumServiceURL = "bacontract_thirdPartyFinancingAddendum.json"
     //upload pdf

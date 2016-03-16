@@ -109,7 +109,7 @@ class BigPictureViewController: UIViewController {
     
     
     func afterSave(sender : AnyObject) {
-        print(sender)
+//        print(sender)
     }
     @IBAction func doClose(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)

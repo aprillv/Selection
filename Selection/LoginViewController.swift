@@ -13,6 +13,11 @@ import MBProgressHUD
 class LoginViewController: BaseViewController, UITextFieldDelegate {
 
     
+    @IBOutlet var heigthConstraint: NSLayoutConstraint!{
+        didSet{
+            heigthConstraint.constant = 1.0 / UIScreen.mainScreen().scale
+        }
+    }
     @IBOutlet var copyrightLbl: UIBarButtonItem!
 //        {
 //        didSet{
@@ -137,7 +142,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     func checkUpate(){
         let version = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
-        let parameter = ["version": (version == nil ?  "" : version!)]
+        let parameter = ["version": (version == nil ?  "" : version!), "xname": "ipad_Selection"]
         
         
         
@@ -323,7 +328,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print(view.frame.size)
-//        checkUpate()
+        checkUpate()
         
         setSignInBtn()
     }

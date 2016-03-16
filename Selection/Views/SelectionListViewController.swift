@@ -12,9 +12,48 @@ import MBProgressHUD
 
 class SelectionListViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
-    @IBOutlet var searchBar: UISearchBar!{
+//    @IBOutlet var seperatorHeight: NSLayoutConstraint!{
+//        didSet{
+//            seperatorHeight.constant = 1.0 / UIScreen.mainScreen().scale
+//        }
+//    }
+    @IBOutlet var viewHeight: NSLayoutConstraint!{
         didSet{
-            searchBar.text = ""
+        viewHeight.constant = 1.0 / UIScreen.mainScreen().scale
+            view.updateConstraintsIfNeeded()
+        }
+    }
+    @IBOutlet var txtField: UITextField!{
+        didSet{
+            txtField.text = ""
+            txtField.placeholder = "Search"
+            txtField.clearButtonMode = .WhileEditing
+            txtField.layer.cornerRadius = 5.0
+            txtField.leftViewMode = .Always
+            txtField.leftView = UIImageView(image: UIImage(named: "search"))
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "textFieldDidChange:", name: UITextFieldTextDidChangeNotification, object: txtField)
+        }
+        
+    }
+    
+    func textFieldDidChange(notifications : NSNotification?){
+        if let txt = txtField.text?.lowercaseString{
+            if txt.isEmpty{
+                selectionList = selectionListOrigin
+            }else{
+                selectionList = selectionListOrigin?.filter(){
+                    //                    print($0)
+                    return $0.idselection!.lowercaseString.containsString(txt)
+                        || $0.selectionname!.lowercaseString.containsString(txt)
+                        || $0.type!.lowercaseString.containsString(txt)
+                        || $0.pricebook!.lowercaseString.containsString(txt)
+                        || $0.pricelevel!.lowercaseString.containsString(txt)
+                    
+                    
+                }
+            }
+        }else{
+            selectionList = selectionListOrigin
         }
     }
     var refreshControl: UIRefreshControl?
@@ -33,10 +72,10 @@ class SelectionListViewController: BaseViewController, UITableViewDataSource, UI
     
     var selectionListOrigin: [AssemblySelectionObj]? {
         didSet{
-            if searchBar.text == "" {
+            if txtField.text == "" {
                 selectionList = selectionListOrigin
             }else{
-                self.searchBar(searchBar, textDidChange: searchBar.text!)
+                self.textFieldDidChange(nil)
             }
         }
     }
@@ -146,26 +185,6 @@ class SelectionListViewController: BaseViewController, UITableViewDataSource, UI
     }
     
     // MARK: - Search Bar Deleagte
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if let txt = searchBar.text?.lowercaseString{
-            if txt.isEmpty{
-                selectionList = selectionListOrigin
-            }else{
-                selectionList = selectionListOrigin?.filter(){
-//                    print($0)
-                return $0.idselection!.lowercaseString.containsString(txt)
-                        || $0.selectionname!.lowercaseString.containsString(txt)
-                        || $0.type!.lowercaseString.containsString(txt)
-                        || $0.pricebook!.lowercaseString.containsString(txt)
-                        || $0.pricelevel!.lowercaseString.containsString(txt)
-                    
-                    
-                }
-            }
-        }else{
-            selectionList = selectionListOrigin
-        }
-        
-    }
+    
     
 }

@@ -12,11 +12,50 @@ import MBProgressHUD
 
 class AssembliesViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
-    @IBOutlet var searchBar: UISearchBar!{
+//    @IBOutlet var seperatorHeight: NSLayoutConstraint!{
+//        didSet{
+//            seperatorHeight.constant = 1.0 / UIScreen.mainScreen().scale
+//        }
+//    }
+    
+    @IBOutlet var viewheight: NSLayoutConstraint!{
         didSet{
-            searchBar.text = ""
+            viewheight.constant = 1.0 / UIScreen.mainScreen().scale
         }
     }
+    @IBOutlet var txtField: UITextField!{
+        didSet{
+            txtField.text = ""
+            txtField.placeholder = "Search"
+            txtField.clearButtonMode = .WhileEditing
+            txtField.layer.cornerRadius = 5.0
+            txtField.leftViewMode = .Always
+            txtField.leftView = UIImageView(image: UIImage(named: "search"))
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "textFieldDidChange:", name: UITextFieldTextDidChangeNotification, object: txtField)
+        }
+        
+    }
+    // MARK: - textField Did Change
+    func textFieldDidChange(notifications : NSNotification?){
+        if let txt = txtField.text?.lowercaseString{
+            if txt.isEmpty{
+                assemblyList = assemblyListOrigin
+            }else{
+                assemblyList = assemblyListOrigin?.filter(){
+                    //                    print($0)
+                    return $0.idnumber!.lowercaseString.containsString(txt)
+                        || $0.idcostcode!.lowercaseString.containsString(txt)
+                        || $0.name!.lowercaseString.containsString(txt)
+                        || $0.categorygroup!.lowercaseString.containsString(txt)
+                    
+                    
+                }
+            }
+        }else{
+            assemblyList = assemblyListOrigin
+        }
+    }
+    
     var refreshControl: UIRefreshControl?
     
     @IBOutlet var tableview: UITableView!{
@@ -33,10 +72,10 @@ class AssembliesViewController: BaseViewController, UITableViewDataSource, UITab
     
     var assemblyListOrigin: [AssemblyItem]? {
         didSet{
-            if searchBar.text == "" {
+            if txtField.text == "" {
                 assemblyList = assemblyListOrigin
             }else{
-                self.searchBar(searchBar, textDidChange: searchBar.text!)
+                self.textFieldDidChange(nil)
             }
         }
     }
@@ -144,26 +183,5 @@ class AssembliesViewController: BaseViewController, UITableViewDataSource, UITab
     
     }
     
-    // MARK: - Search Bar Deleagte
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if let txt = searchBar.text?.lowercaseString{
-            if txt.isEmpty{
-                assemblyList = assemblyListOrigin
-            }else{
-                assemblyList = assemblyListOrigin?.filter(){
-//                    print($0)
-                    return $0.idnumber!.lowercaseString.containsString(txt)
-                        || $0.idcostcode!.lowercaseString.containsString(txt)
-                    || $0.name!.lowercaseString.containsString(txt)
-                    || $0.categorygroup!.lowercaseString.containsString(txt)
-                    
-                    
-                }
-            }
-        }else{
-            assemblyList = assemblyListOrigin
-        }
-        
-    }
     
 }

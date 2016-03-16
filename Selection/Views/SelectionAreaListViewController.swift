@@ -13,9 +13,40 @@ import MBProgressHUD
 
 class SelectionAreaListViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
     
-    @IBOutlet var searchBar: UISearchBar!{
+    @IBOutlet var viewHeight: NSLayoutConstraint!{
         didSet{
-            searchBar.text = ""
+            viewHeight.constant = 1.0 / UIScreen.mainScreen().scale
+            view.updateConstraintsIfNeeded()
+        }
+    }
+    @IBOutlet var txtField: UITextField!{
+        didSet{
+            txtField.text = ""
+            txtField.placeholder = "Search"
+            txtField.clearButtonMode = .WhileEditing
+            txtField.layer.cornerRadius = 5.0
+            txtField.leftViewMode = .Always
+            txtField.leftView = UIImageView(image: UIImage(named: "search"))
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "textFieldDidChange:", name: UITextFieldTextDidChangeNotification, object: txtField)
+        }
+        
+    }
+    // MARK: - textField Did Change
+    func textFieldDidChange(notifications : NSNotification?){
+        if let txt = txtField.text?.lowercaseString{
+            if txt.isEmpty{
+                selectionList = selectionListOrigin
+            }else{
+                selectionList = selectionListOrigin?.filter(){
+                    //                    print($0)
+                    return $0.selectionarea!.lowercaseString.containsString(txt)
+                        || $0.des!.lowercaseString.containsString(txt)
+                    
+                    
+                }
+            }
+        }else{
+            selectionList = selectionListOrigin
         }
     }
     var refreshControl: UIRefreshControl?
@@ -34,10 +65,10 @@ class SelectionAreaListViewController: BaseViewController, UITableViewDataSource
     
     var selectionListOrigin: [AssemblySelectionAreaObj]? {
         didSet{
-            if searchBar.text == "" {
+            if txtField.text == "" {
                 selectionList = selectionListOrigin
             }else{
-                self.searchBar(searchBar, textDidChange: searchBar.text!)
+                self.textFieldDidChange(nil)
             }
         }
     }
@@ -125,25 +156,6 @@ class SelectionAreaListViewController: BaseViewController, UITableViewDataSource
     }
     
     
-    // MARK: - Search Bar Deleagte
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if let txt = searchBar.text?.lowercaseString{
-            if txt.isEmpty{
-                selectionList = selectionListOrigin
-            }else{
-                selectionList = selectionListOrigin?.filter(){
-                    //                    print($0)
-                    return $0.selectionarea!.lowercaseString.containsString(txt)
-                        || $0.des!.lowercaseString.containsString(txt)
-                    
-                    
-                }
-            }
-        }else{
-            selectionList = selectionListOrigin
-        }
-        
-    }
     
     @IBAction func imageTapped(sender: UITapGestureRecognizer) {
         

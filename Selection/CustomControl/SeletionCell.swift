@@ -9,7 +9,9 @@
 import UIKit
 
 class SeletionCell: CiaCell {
+   
 
+//    @IBOutlet var seperatorHeight: NSLayoutConstraint!
     @IBOutlet var pricelevel: UILabel!
     @IBOutlet var selectionName: UILabel!
     @IBOutlet var idSelection: UILabel!

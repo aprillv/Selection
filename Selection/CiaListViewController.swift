@@ -10,57 +10,50 @@ import UIKit
 import Alamofire
 import MBProgressHUD
 
-class CiaListViewController: UITableViewController, UISearchBarDelegate {
+class CiaListViewController: UITableViewController, UITextFieldDelegate {
+    
+    @IBOutlet var viewheight: NSLayoutConstraint!{
+        didSet{
+            viewheight.constant = 1.0 / UIScreen.mainScreen().scale
+            view.updateConstraintsIfNeeded()
+        }
+    }
+    @IBOutlet var txtField: UITextField!{
+        didSet{
+            txtField.layer.cornerRadius = 5.0
+            txtField.placeholder = "Search"
+            txtField.clearButtonMode = .WhileEditing
+            txtField.leftViewMode = .Always
+            txtField.leftView = UIImageView(image: UIImage(named: "search"))
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "textFieldDidChange:", name: UITextFieldTextDidChangeNotification, object: txtField)
+        }
+    
+    }
+    
+    func textFieldDidChange(notifications : NSNotification){
+        if let txt = txtField.text?.lowercaseString{
+            if txt.isEmpty{
+                CiaList = CiaListOrigin
+            }else{
+                CiaList = CiaListOrigin?.filter(){
+                    
+                    return $0.ciaid!.lowercaseString.containsString(txt)
+                        || $0.cianame!.lowercaseString.containsString(txt)
+                    
+                    
+                }
+            }
+        }else{
+            CiaList = CiaListOrigin
+        }
+    }
+    
     
 //    var lastSelectedIndexPath : NSIndexPath?
    
     @IBOutlet var backItem: UIBarButtonItem!
 //    @IBOutlet var switchItem: UIBarButtonItem!
-    @IBOutlet var searchBar: UISearchBar!{
-        didSet{
-            
-            
-//            for iv in searchBar.subviews {
-//                for iv1 in iv.subviews {
-//                    if !iv1.isKindOfClass(UITextField){
-//                        iv1.removeFromSuperview()
-//                    }
-////                    for iv2 in iv1.subviews {
-////                        print(iv2)
-//////                        iv2.removeFromSuperview()
-////                    }
-//                }
-//            }
-            
-//            let txt = searchBar.valueForKey("_searchGround")
-//            print(txt)
-            
-//            searchBar.placeholder = "Search"
-////            searchBar.userInteractionEnabled = false
-//            let txt1 = UITextField(frame: CGRect(x: 50, y: 12, width: searchBar.frame.width - 60, height: 22))
-//            txt1.backgroundColor = UIColor.whiteColor()
-//            searchBar.addSubview(txt1)
-            
-//            searchBar.placeholder = "     "
-//            
-//            if let txt = searchBar.valueForKey("_searchField") as? UITextField {
-////                txt.backgroundColor = UIColor.whiteColor()
-////                txt.leftViewMode = .Never
-//////                txt.leftView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-////                txt.rightViewMode = .Never
-////                
-//////                txt.background =  UIImage(named: "search")
-//////                txt.leftView = UIImageView(image: UIImage(named: "search"))
-//////               txt.addSubview(UIImageView(image: UIImage(named: "search")))
-//////                txt.edd
-////                txt.borderStyle = .None
-////                txt.layer.borderColor = UIColor.clearColor().CGColor
-////                
-//                txt.textAlignment = .Left
-////                txt.clearButtonMode = .Never
-//            }
-        }
-    }
+//    @IBOutlet var searchBar: UISearchBar!
     @IBAction func doLogout(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
@@ -111,25 +104,8 @@ class CiaListViewController: UITableViewController, UISearchBarDelegate {
 
     
     // MARK: - Search Bar Deleagte
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if let txt = searchBar.text?.lowercaseString{
-            if txt.isEmpty{
-                CiaList = CiaListOrigin
-            }else{
-                CiaList = CiaListOrigin?.filter(){
-                    
-                    return $0.ciaid!.lowercaseString.containsString(txt)
-                        || $0.cianame!.lowercaseString.containsString(txt)
-                    
-                    
-                }
-            }
-        }else{
-             CiaList = CiaListOrigin
-        }
-        
-    }
-
+    
+    
     // MARK: - Table view data source
 //    override func tableView(tableView1: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        
@@ -253,7 +229,7 @@ class CiaListViewController: UITableViewController, UISearchBarDelegate {
    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-       self.searchBar.resignFirstResponder()
+       self.txtField.resignFirstResponder()
         
         
         self.performSegueWithIdentifier(CConstants.SegueToAssemblies, sender: self.CiaList![indexPath.row])
@@ -412,7 +388,7 @@ class CiaListViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        self.searchBar.resignFirstResponder()
+        self.txtField.resignFirstResponder()
     }
   
     

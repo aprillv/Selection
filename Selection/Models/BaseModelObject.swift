@@ -58,7 +58,7 @@ class BaseModelObject : NSObject{
         if let str0 = str {
             let index = str0.startIndex.advancedBy(1)
             let firstCapitalWord = str0.substringToIndex(index).capitalizedString
-            print(constants.projectName + firstCapitalWord + str0.substringFromIndex(index) + constants.lastName)
+//            print(constants.projectName + firstCapitalWord + str0.substringFromIndex(index) + constants.lastName)
             return constants.projectName + firstCapitalWord + str0.substringFromIndex(index) + constants.lastName
         }
         return nil

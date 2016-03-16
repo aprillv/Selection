@@ -129,7 +129,7 @@ class ViewCatalog: BaseViewController, UICollectionViewDataSource, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         let userInfo = NSUserDefaults.standardUserDefaults()
-        if let idcia = userInfo.valueForKey(CConstants.UserInfoCiaId),
+        if let _ = userInfo.valueForKey(CConstants.UserInfoCiaId),
             let cianame = userInfo.valueForKey(CConstants.UserInfoCiaName)  {
 //        self.title = "\(idcia ) ~ \(cianame )"
                 self.title = "\(cianame )"
